@@ -30,7 +30,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json());
@@ -42,7 +42,7 @@ app.use(
     createParentPath: true,
     tempFileDir: path.join(__dirname, "tmp"),
     limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
-  })
+  }),
 ); // for handling file uploads
 
 // cron jobs
@@ -62,6 +62,9 @@ cron.schedule("0 * * * *", () => {
 });
 
 // Routes
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
